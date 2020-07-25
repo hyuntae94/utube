@@ -4,7 +4,7 @@
   "description": "Youtube Cloning",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node index.js --delay 3s"
+    "start": "nodemon init.js --exec babel-node --delay 3s"
   },
   "author": "hyuntae",
   "license": "ISC",

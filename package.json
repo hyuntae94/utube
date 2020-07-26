@@ -2,12 +2,7 @@
   "name": "utube",
   "version": "1.0.0",
   "description": "Youtube Cloning",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon init.js --exec babel-node --delay 3s"
-  },
   "author": "hyuntae",
-  "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.10.5",
     "@babel/node": "^7.10.5",
@@ -17,6 +12,9 @@
     "express": "^4.17.1",
     "helmet": "^3.23.3",
     "morgan": "^1.10.0"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node init.js --delay 2"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

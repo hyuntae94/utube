@@ -22,7 +22,10 @@ export const postLogin = (req, res) => {
     res.redirect(routes.home);
 };
 
-export const logout = (req, res) => res.render("logout", { pageTitle: "LogOut" });
+export const logout = (req, res) => {
+    res.redirect(routes.home);
+};
+
 export const userDetail = (req, res) => res.render("userDetail", { pageTitle: "UserDetail" });
 export const editProfile = (req, res) => res.render("editProfile", { pageTitle: "EditProfile" });
 export const changePassword = (req, res) => res.render("changePassword", { pageTitle: "ChangePassword" });

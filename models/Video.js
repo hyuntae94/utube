@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-const VideoSchema = new mongoosefrom.Schema({
-    fileUrl:{
+const VideoSchema = new mongoose.Schema({
+    fileUrl: {
         type: String,
         required: "File URL is required"
     },
@@ -10,21 +10,21 @@ const VideoSchema = new mongoosefrom.Schema({
         required: "Title is required"
     },
     description: String,
-    view:{
-        type:Number,
+    view: {
+        type: Number,
         default: 0
     },
-    createdAt:{
+    createdAt: {
         type: Date,
         default: Date.now
     },
-    comments:[
+    comments: [
         {
-            type : mongoose.Schema.Types.ObjectId,
-            ref:"Comment"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Comment"
         }
     ]
 });
 
-const model = mongoose.model("Video",VideoSchema);
+const model = mongoose.model("Video", VideoSchema);
 export default model;

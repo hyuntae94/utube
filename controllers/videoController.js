@@ -21,11 +21,28 @@ export const search = (req, res) => {
 export const getUpload = (req, res) =>
     res.render("upload", { pageTitle: "Upload" });
 
-export const postUpload = (req, res) => {
+export const postUpload = async (req, res) => {
     const {
-        body: { file, title, description }
-    } = req;
-    res.redirect(routes.videoDetail(324393));
+        body: { title, description },
+        file: { path }
+    } = req;    
+    const newVideo = await Video.create({
+        fileUrl: path,
+        title,
+        description
+    });
+    /*console.log(newVideo);
+    {
+        views: 0,
+        comments: [],
+        _id: 5f27d9696717cc512ce0ee8b,
+        fileUrl: 'videos\\130e8c545f960059c46e28c462f970d1',
+        title: 'Kingdom',
+        description: 'part2',
+        createdAt: 2020-08-03T09:31:21.145Z,
+        __v: 0
+    }*/
+    res.redirect(routes.videoDetail(newVideo.id));
 };
 
 export const videoDetail = (req, res) => res.render("videoDetail", {

@@ -75,8 +75,10 @@ typings/
 # FuseBox cache
 .fusebox/
 package-lock.json
-uploads
-static
-build
-
 .vscode
+
+uploads
+package.json
+
+
+

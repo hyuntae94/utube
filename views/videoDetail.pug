@@ -6,7 +6,7 @@ block content
     .video__info
         a(href=routes.editVideo(video.id)) Edit video
         h5.video__title=video.title
-        span.video__views=video.views
+        span.video__views=`${video.views} Views`
         p.video__description=video.description
     .video__comments
         if video.comments.length === 1

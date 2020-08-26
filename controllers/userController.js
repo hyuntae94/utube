@@ -71,6 +71,10 @@ export const logout = (req, res) => {
     res.redirect(routes.home);
 };
 
+export const getMe = (req, res) => {
+    res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+}
+
 export const userDetail = (req, res) => res.render("userDetail", { pageTitle: "UserDetail" });
 export const editProfile = (req, res) => res.render("editProfile", { pageTitle: "EditProfile" });
 export const changePassword = (req, res) => res.render("changePassword", { pageTitle: "ChangePassword" });

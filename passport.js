@@ -1,7 +1,8 @@
 import passport from "passport";
 import User from "./models/User";
+import FacebookStrategy from "passport-facebook";
 import GithubStrategy from "passport-github";
-import { githubLoginCallback } from "./controllers/userController";
+import { githubLoginCallback, facebookLoginCallback } from "./controllers/userController";
 import routes from "./routes";
 
 passport.use(User.createStrategy());
@@ -18,3 +19,13 @@ passport.use(
 		githubLoginCallback
 	)
 );
+
+passport.use(
+	new FacebookStrategy({
+		clientID: process.env.FB_ID,
+		clientSecret: process.env.FB_SECRET,
+		callbackURl: `http://localhost:3333${routes.facebookCallback}`
+	},
+		facebookLoginCallback
+	)
+)

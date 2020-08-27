@@ -11,8 +11,8 @@ import {
     githubLogin,
     postGithubLogIn,
     getMe,
-    facebookLogin,
-    postFacebookLogin
+    kakaoLogin,
+    postKakaoLogin
 } from "../controllers/userController";
 import { onlyPublic, onlyPrivate } from "../middlewares";
 const globalRouter = express.Router();
@@ -34,13 +34,13 @@ globalRouter.get(
     passport.authenticate('github', { failureRedirect: '/login' }),
     postGithubLogIn);
 
+globalRouter.get(routes.kakao, kakaoLogin);
+globalRouter.get(
+    routes.kakaoCallback,
+    passport.authenticate("kakao", { failureRedirect: '/login' }),
+    postKakaoLogin);
+
 globalRouter.get(routes.me, getMe);
 
-globalRouter.get(routes.facebook, facebookLogin);
-globalRouter.get(
-    routes.facebookCallback,
-    passport.authenticate("facebook", { failureRedirect: '/login' }),
-    postFacebookLogin
-)
 
 export default globalRouter;

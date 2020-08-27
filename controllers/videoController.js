@@ -37,19 +37,11 @@ export const postUpload = async (req, res) => {
     const newVideo = await Video.create({
         fileUrl: path,
         title,
-        description
+        description,
+        creator: req.user.id
     });
-    /*console.log(newVideo);
-    {
-        views: 0,
-        comments: [],
-        _id: 5f27d9696717cc512ce0ee8b,
-        fileUrl: 'videos\\130e8c545f960059c46e28c462f970d1',
-        title: 'Kingdom',
-        description: 'part2',
-        createdAt: 2020-08-03T09:31:21.145Z,
-        __v: 0
-    }*/
+    req.user.videos.push(newVideo.id);
+    req.user.save();
     res.redirect(routes.videoDetail(newVideo.id));
 };
 
@@ -58,8 +50,9 @@ export const videoDetail = async (req, res) => {
         params: { id }
     } = req;
     try {
-        const video = await Video.findById(id);
+        const video = await Video.findById(id).populate("creator");
         res.render("videoDetail", { pageTitle: video.title, video });
+        console.log(video);
     } catch (error) {
         res.redirect(routes.home);
     }

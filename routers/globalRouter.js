@@ -34,6 +34,7 @@ globalRouter.get(
     passport.authenticate('github', { failureRedirect: '/login' }),
     postGithubLogIn);
 
+//Kakao
 globalRouter.get(routes.kakao, kakaoLogin);
 globalRouter.get(
     routes.kakaoCallback,

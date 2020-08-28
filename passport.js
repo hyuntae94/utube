@@ -14,7 +14,7 @@ passport.use(
 	new GithubStrategy({
 		clientID: process.env.GH_ID,
 		clientSecret: process.env.GH_SECRET,
-		callbackURl: `http://localhost:3333${routes.githubCallback}`
+		callbackURL: `http://localhost:3333${routes.githubCallback}`
 	},
 		githubLoginCallback
 	)
@@ -24,7 +24,7 @@ passport.use(
 	new KakaoStrategy({
 		clientID: process.env.KO_ID,
 		clientSecret: "",
-		callbackURl: `http://localhost:3333${routes.kakaoCallback}`
+		callbackURL: "http://localhost:3333/oauth"
 	},
 		kakaoLoginCallback
 	)

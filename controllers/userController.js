@@ -64,19 +64,33 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
 
 export const postGithubLogIn = (req, res) => {
     res.redirect(routes.home);
-};
+}
 
-export const kakaoLogin = passport.authenticate("kakao");
+// Kakao Login
+export const kakaoLogin = passport.authenticate("kakao", {
+    failureFlash: "Failed",
+    successFlash: "Success"
+})
 
-export const kakaoLoginCallback = async (_, __, profile, done) => {
+export const kakaoLoginCallback = async (accessToken, refreshToken, profile, done) => {
+    console.log(accessToken, refreshToken, profile, done)
     const {
-        _json: { id, avatar_url, name, email }
+        _json: {
+            id,
+            properties: {
+                nickname: name,
+                profile_image: avatar_url
+            },
+            kakao_account: {
+                email
+            }
+        }
     } = profile;
     try {
         const user = await User.findOne({ email });
         if (user) {
-            user.kakaoId = id;
-            user.save();
+            user.kakaoId = id,
+                user.save()
             return done(null, user);
         }
         const newUser = await User.create({
@@ -86,14 +100,15 @@ export const kakaoLoginCallback = async (_, __, profile, done) => {
             avatarUrl: avatar_url
         });
         return done(null, newUser);
-    } catch (error) {
+    }
+    catch (error) {
         return done(error);
     }
 };
 
 export const postKakaoLogin = (req, res) => {
     res.redirect(routes.home);
-}
+};
 
 export const logout = (req, res) => {
     req.logout();
@@ -122,6 +137,7 @@ export const postEditProfile = async (req, res) => {
         body: { name, email },
         file
     } = req;
+    console.log(req);
     try {
         await User.findByIdAndUpdate(req.user.id, {
             name,

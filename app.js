@@ -11,6 +11,7 @@ import routes from "./routes";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
+import apiRouter from "./routers/apiRouter";
 import { localsMiddleware } from "./middlewares";
 
 import "./passport";//middleware처럼사용하기위해서
@@ -32,7 +33,7 @@ app.use(
 		secret: process.env.COOKIE_SECRET,
 		resave: true,
 		saveUninitialized: false,
-		store : new CokieStore({mongooseConnection:mongoose.connection})
+		store: new CokieStore({ mongooseConnection: mongoose.connection })
 	})
 )
 app.use(passport.initialize());//다른 middleware 사용하기전에 초기화
@@ -42,5 +43,6 @@ app.use(localsMiddleware);
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
+app.use(routes.registerView, apiRouter);
 
 export default app;

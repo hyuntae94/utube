@@ -60,7 +60,6 @@ const formatDate = seconds => {
 	let hours = Math.floor(secondsNumber / 3600);
 	let minutes = Math.floor((secondsNumber - hours * 3600) / 60);
 	let totalSeconds = secondsNumber - hours * 3600 - minutes * 60;
-
 	if (hours < 10) {
 		hours = `0${hours}`;
 	}
@@ -74,7 +73,7 @@ const formatDate = seconds => {
 };
 
 function getCurrentTime() {
-	currentTime.innerHTML = formatDate(videoPlayer.currentTime);
+	currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
 }
 
 function setTotalTime() {
@@ -83,11 +82,16 @@ function setTotalTime() {
 	setInterval(getCurrentTime, 1000);
 }
 
+function handleEnded() {
+	videoPlayer.currentTime = 0;
+	playBtn.innerHTML = '<i class="fas fa-play"></i>';
+}
 function init() {
 	playBtn.addEventListener("click", handlePlayClick);
 	volumeBtn.addEventListener("click", handleVolumeClick);
 	fullScrnBtn.addEventListener("click", goFullScreen);
 	videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+	videoPlayer.addEventListener("ended", handleEnded);
 }
 
 if (videoContainer) {

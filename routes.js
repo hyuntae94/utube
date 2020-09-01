@@ -34,7 +34,7 @@ const KAKAO_CALLBACK = "/oauth";
 //API
 
 const API = "/api";
-const REGISTER_VIEW = "/:id/view";
+const REGISTER_VIEW = "/:id/view";  
 
 const routes = {
   home: HOME,

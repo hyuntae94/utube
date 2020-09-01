@@ -43,6 +43,6 @@ app.use(localsMiddleware);
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
-app.use(routes.registerView, apiRouter);
+app.use(routes.api, apiRouter);
 
 export default app;

@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "extract-text-webpack-plugin": "^3.0.2",
+    "get-blob-duration": "^1.1.2",
     "helmet": "^3.23.3",
     "mini-css-extract-plugin": "^0.10.0",
     "mongoose": "^5.9.27",

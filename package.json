@@ -4,6 +4,7 @@
   "description": "Youtube Cloning",
   "author": "hyuntae",
   "dependencies": {
+    "@babel/cli": "^7.11.6",
     "@babel/core": "^7.10.5",
     "@babel/node": "^7.10.5",
     "@babel/polyfill": "^7.10.4",
@@ -15,6 +16,7 @@
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.5",
+    "cp": "^0.2.0",
     "cross-env": "^7.0.2",
     "css-loader": "^4.2.1",
     "dotenv": "^8.2.0",
@@ -42,9 +44,14 @@
     "webpack-cli": "^3.3.12"
   },
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore '.scss' --ignore 'static' ",
-    "dev:assets": "cross-env WEBPACK_ENV=development webpack -w",
-    "bulid:assets": "cross-env WEBPACK_ENV=production webpack"
+    "dev:server": "nodemon --exec babel-node src/init.js --delay 2 --ignore '.scss' --ignore 'static' ",
+    "dev:assets": "cd src && cross-env WEBPACK_ENV=development webpack -w",
+    "build:assets": "cd src && cross-env WEBPACK_ENV=production webpack",
+    "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
+    "copyAll": "xcopy src\\static build\\static && xcopy src\\views build\\views && xcopy src\\views\\layouts build\\views\\layouts && xcopy src\\views\\mixins build\\views\\mixins && xcopy src\\views\\partials build\\views\\partials",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "rd /s \"build\"",
+    "start": "node build/init.js"
   },
   "devDependencies": {
     "eslint": "^7.6.0",

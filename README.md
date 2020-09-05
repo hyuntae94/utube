@@ -1,5 +1,5 @@
 # utube
-youtube_cloning
+Youtube_Cloning
 
 Front-end : Pug + SCSS + Vanilla JS(ES6) + WebPack
 

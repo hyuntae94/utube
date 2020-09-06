@@ -15,7 +15,7 @@ passport.use(
 		clientID: process.env.GH_ID,
 		clientSecret: process.env.GH_SECRET,
 		callbackURL: process.env.PRODUCTION
-			? `https://morning-oasis-63813.herokuapp.com${routes.githubCallback}`
+			? `https://peaceful-dusk-84525.herokuapp.com${routes.githubCallback}`
 			: `http://localhost:3333${routes.githubCallback}`
 	},
 		githubLoginCallback
@@ -27,7 +27,7 @@ passport.use(
 		clientID: process.env.KO_ID,
 		clientSecret: "",
 		callbackURL: process.env.PRODUCTION
-			? `https://morning-oasis-63813.herokuapp.com${routes.kakaoCallback}`
+			? `https://peaceful-dusk-84525.herokuapp.com${routes.kakaoCallback}`
 			: `http://localhost:3333${routes.kakaoCallback}`
 	},
 		kakaoLoginCallback

@@ -14,7 +14,9 @@ passport.use(
 	new GithubStrategy({
 		clientID: process.env.GH_ID,
 		clientSecret: process.env.GH_SECRET,
-		callbackURL: `http://localhost:3333${routes.githubCallback}`
+		callbackURL: process.env.PRODUCTION
+			? `https://polar-sea-27980.herokuapp.com${routes.githubCallback}`
+			: `http://localhost:3333${routes.githubCallback}`
 	},
 		githubLoginCallback
 	)
@@ -24,7 +26,9 @@ passport.use(
 	new KakaoStrategy({
 		clientID: process.env.KO_ID,
 		clientSecret: "",
-		callbackURL: "http://localhost:3333/oauth"
+		callbackURL: process.env.PRODUCTION
+			? `https://polar-sea-27980.herokuapp.com${routes.kakaoCallback}`
+			: `http://localhost:3333${routes.kakaoCallback}`
 	},
 		kakaoLoginCallback
 	)

@@ -3,11 +3,15 @@ import getBlobDuration from "get-blob-duration";
 const videoContainer = document.getElementById("jsVideoPlayer");
 const videoPlayer = document.querySelector("#jsVideoPlayer video");
 const playBtn = document.getElementById("jsPlayButton");
+const progress = document.querySelector(".progress");
 const volumeBtn = document.getElementById("jsVolumeBtn");
 const fullScrnBtn = document.getElementById("jsFullScreen");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
+
+let currentTimeNum = 0.0;
+let duration = 0.1;
 
 const registerView = () => {
 	const videoId = window.location.href.split("/videos/")[1];
@@ -85,19 +89,21 @@ const formatDate = seconds => {
 };
 
 function getCurrentTime() {
-	currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
+	const before = videoPlayer.currentTime;
+	currentTimeNum = before;
+	const after = formatDate(Math.floor(before));
+	currentTime.innerHTML = after;
+	progress.value = (currentTimeNum / duration) * 100;
 }
 
 async function setTotalTime() {
-	let duration;
-	if (!isFinite(videoPlayer.duration)) {
-		const blob = await fetch(videoPlayer.src).then(response => response.blob());
-		duration = await getBlobDuration(blob);
-	} else {
-		duration = videoPlayer.duration;
-	}
+	const blob = await fetch(videoPlayer.src, {
+		mode: "cors",
+	}).then((response) => response.blob());
+	duration = await getBlobDuration(blob);
 	const totalTimeString = formatDate(duration);
 	totalTime.innerHTML = totalTimeString;
+	// currentTime = "00:00"
 	setInterval(getCurrentTime, 1000);
 }
 

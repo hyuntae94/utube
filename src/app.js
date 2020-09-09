@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import passport from "passport";
 import session from "express-session";
 import path from "path";
+import flash from "express-flash";
 import mongoose from "mongoose";
 import MongoStore from "connect-mongo";
 import routes from "./routes";
@@ -37,6 +38,7 @@ app.use(
 		store: new CokieStore({ mongooseConnection: mongoose.connection })
 	})
 )
+app.use(flash());
 app.use(passport.initialize());//다른 middleware 사용하기전에 초기화
 app.use(passport.session());
 app.use(localsMiddleware);
